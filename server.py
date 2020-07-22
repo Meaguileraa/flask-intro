@@ -13,6 +13,9 @@ AWESOMENESS = [
     'oh-so-not-meh', 'brilliant', 'ducky', 'coolio', 'incredible',
     'wonderful', 'smashing', 'lovely']
 
+MEANNESS = ['ugly', 'mean', 'annoying', 'rude', 'immature', 'childish',
+     'grumpy', 'bossy']
+
 
 @app.route('/')
 def start_here():
@@ -20,9 +23,9 @@ def start_here():
 
     return """
     <!doctype html>
-    <html>Hi! This is the home page.
+    <html>Hi! Welcome to the home page.
       <body>
-        <a href ="/hello">Hello Page</a> 
+        <a href ="/hello">Start Here</a> 
       </body>
 
     </html>"""
@@ -51,12 +54,19 @@ def say_hello():
           <input type="radio" name="compliment" value="nice">Nice<br>
           <input type="radio" name="compliment" value="wonderful">Wonderful<br>
           <input type="radio" name="compliment" value="awesome">Awesome<br>
-          <input type="submit" value="Submit">
+
+          What diss would you like?<br>
+          <input type="radio" name="diss" value="ugly">Ugly<br>
+          <input type="radio" name="diss" value="mean">Mean<br>
+          <input type="radio" name="diss" value="annoying">Annoying<br>
+          <input type="radio" name="diss" value="rude">Rude<br>
+          <input type="radio" name="diss" value="immature">Immature<br>
+          <input type="submit" value="Submit"><br>
         </form>
 
       </body>
-    </html>
-    """
+  </html>
+  """
 
 
 @app.route('/greet')
@@ -66,18 +76,21 @@ def greet_person():
     player = request.args.get("person")
 
     compliment = request.args.get("compliment")
+    diss = request.args.get("diss")
+    #y=x intentional error to view the debugger page
 
     return """
     <!doctype html>
     <html>
       <head>
         <title>A Compliment</title>
+        <title>A Diss</title>
       </head>
       <body>
         Hi, {}! I think you're {}!
       </body>
     </html>
-    """.format(player, compliment)
+    """.format(player,compliment or diss)
 
 
 if __name__ == '__main__':
