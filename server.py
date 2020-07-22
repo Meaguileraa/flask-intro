@@ -2,8 +2,7 @@
 
 from random import choice
 
-from flask import Flask, request
-
+from flask import Flask, request, render_template
 # "__name__" is a special Python variable for the name of the current module
 # Flask wants to know this to know what any imported things are relative to.
 app = Flask(__name__)
@@ -44,7 +43,8 @@ def say_hello():
         <h1>Hi There!</h1>
 
         <form action="/greet" method='GET'>
-          What's your name? <input type="text" name="person">
+          What's your name? <input type="text" name="person"
+
           What compliment would you like?<br>
           <input type="radio" name="compliment" value="amazing">Amazing<br>
           <input type="radio" name="compliment" value="cool">Cool<br>
@@ -76,6 +76,11 @@ def greet_person():
     player = request.args.get("person")
 
     compliment = request.args.get("compliment")
+    #from flask import render_template
+    #compliment = choice(AWESOMENESS)
+    #diss = choice(MEANNESS)
+
+    #return render_template(name=player, compliment=AWESOMENESS, diss=MEANNESS)
     diss = request.args.get("diss")
     #y=x intentional error to view the debugger page
 
@@ -91,6 +96,14 @@ def greet_person():
       </body>
     </html>
     """.format(player,compliment or diss)
+
+
+# FURTHER STUDY
+          #     What compliment would you like?<br>
+          # <input type="radio" name="compliment" value="awesomeness">Awesomeness<br>
+
+          # What diss would you like?<br>
+          # <input type="radio" name="diss" value="meanness">Meanness<br>
 
 
 if __name__ == '__main__':
